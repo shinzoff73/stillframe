@@ -1,11 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stillframe</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+    </style>
 </head>
-<body>
-  <h1>Under Construction</h1>
+
+<body class="bg-zinc-900 text-zinc-200" style="font-family: 'Google Sans';">
+    <div class="max-w-7xl mx-auto min-h-screen">
+        <!-- Header -->
+        <div class="flex justify-between items-center p-4 m-4 border-1 rounded-full border-zinc-700">
+
+            <div class="flex items-center gap-2">
+                <img class="h-8 rounded-xl" src="/logo.png" alt="">
+                <h1 class="sm:text-2xl text-xl">stillframe.</h1>
+            </div>
+
+            <div class="">
+                <a class="border-2 border-zinc-700 py-1 px-3 rounded-full text-sm hover:bg-zinc-800 transition duration-200"
+                    href="">Explore wallpapers ↗</a>
+            </div>
+
+        </div>
+
+        <!-- First Page -->
+        <div class="flex p-4 gap-4 py-10 flex-col sm:flex-row items-center">
+            <div class="w-full">
+                <h2 class="md:text-7xl text-5xl font-bold tracking-tighter text-center sm:text-start">Your Screen</h2>
+                <h2 class="md:text-7xl text-5xl font-bold tracking-tighter text-center sm:text-start">Your <span class="text-lime-300">Frame.</span></h2>
+
+                <p class="max-w-md pt-6 px-4 text-center sm:text-start">A carefully curated world of wallpapers inspired by icons, imagination and
+                    the art of standing apart.</p>
+            </div>
+            <div class=" w-full">
+                <img class="sm:h-70 h-60 mx-auto " src="/MacBook Pro with Painted Sunset Lock Screen.png" alt="">
+            </div>
+        </div>
+
+        <!-- category -->
+        <section class="py-12 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+
+                <!-- Section Header -->
+                <div class="flex items-end justify-between mb-5">
+                    <div>
+                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+                            Browse Categories
+                        </h2>
+                        <p class="text-gray-400 mt-2 text-sm sm:text-base">
+                            Find the perfect wallpaper for your screen.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Category Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+
+                    <!-- Anime -->
+                    <a href="/category/anime"
+                        class="group relative overflow-hidden rounded-2xl aspect-[16/9] bg-zinc-900">
+                        <img src="https://i.ibb.co/bw3YnmD/Zoro-Beneath-the-Autumn-Sunset.png" alt="Anime Wallpapers"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-white font-bold text-lg">Anime</h3>
+                            <p class="text-gray-300 text-xs mt-1">Explore collection ↗</p>
+                        </div>
+                    </a>
+
+                    <!-- Modern -->
+                    <a href="/category/modern"
+                        class="group relative overflow-hidden rounded-2xl aspect-[16/9] bg-zinc-900">
+                        <img src="https://i.ibb.co/whRCBgF3/xaj-R7-NEez-Dw-Qw-Li-WLi-J1wd0-Dz-ZUr-Rn-VAtd-Hw7-Vjg.jpg"
+                            alt="Modern Wallpapers"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-white font-bold text-lg">Modern</h3>
+                            <p class="text-gray-300 text-xs mt-1">Explore collection ↗</p>
+                        </div>
+                    </a>
+
+                    <!-- Motivational -->
+                    <a href="/category/motivational"
+                        class="group relative overflow-hidden rounded-2xl aspect-[16/9] bg-zinc-900">
+                        <img src="https://i.ibb.co/zWy5w4pj/Mz-Jtnw1-N0-YF2-Va-WWcb1-KJsapv1-Qcibv-KHww-Jt-Ui-I.jpg"
+                            alt="Motivational Wallpapers"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-white font-bold text-lg">Motivational</h3>
+                            <p class="text-gray-300 text-xs mt-1">Explore collection ↗</p>
+                        </div>
+                    </a>
+
+                    <!-- Nature -->
+                    <a href="/category/nature"
+                        class="group relative overflow-hidden rounded-2xl aspect-[16/9] bg-zinc-900">
+                        <img src="https://i.ibb.co/5gxzB4vt/9fn72s-Vrzw-NGqshhttga-Qp-R1f8-TYKEFCi-GIb-Ahr7.jpg"
+                            alt="Nature Wallpapers"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-white font-bold text-lg">Nature</h3>
+                            <p class="text-gray-300 text-xs mt-1">Explore collection ↗</p>
+                        </div>
+                    </a>
+
+                    <!-- Superhero -->
+                    <a href="/category/superhero"
+                        class="group relative overflow-hidden rounded-2xl aspect-[16/9] bg-zinc-900">
+                        <img src="https://i.ibb.co/r2bGpypK/cd9e06aa-96f5-4dd1-9e19-0572ac3434fb.jpg"
+                            alt="Superhero Wallpapers"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-white font-bold text-lg">Superhero</h3>
+                            <p class="text-gray-300 text-xs mt-1">Explore collection ↗</p>
+                        </div>
+                    </a>
+
+                    <!-- Abstract -->
+                    <a href="/category/abstract"
+                        class="group relative overflow-hidden rounded-2xl aspect-[16/9] bg-zinc-900">
+                        <img src="https://i.ibb.co/3YjvWrc1/TQu5-P2-WJv4p5n3by0-Og6-IMROd1-PRA7-UZfp-Be-Rlg-D-thumbnail-X3-QC.jpg"
+                            alt="Abstract Wallpapers"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-white font-bold text-lg">Abstract</h3>
+                            <p class="text-gray-300 text-xs mt-1">Explore collection ↗</p>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- wallpapers -->
+         <div class="p-4 grid grid-cols-4 gap-4">
+            
+         </div>
+    </div>
 </body>
+
 </html>
