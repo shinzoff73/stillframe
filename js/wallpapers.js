@@ -22,7 +22,7 @@ window.wallpapers = [
         id: "modern-workspace",
         title: "Modern Workspace",
         category: "Modern",
-        image: "https://i.ibb.co/whRCBgF3/xaj-R7-NEez-Dw-Qw-Li-WLi-J1wd0-Dz-ZUr-Rn-VAtd-Hw7-Vjg.jpg",
+        image: "https://i.postimg.cc/xjBFQ4C4/metallic-crosses-macos-wallpaper-45654.jpg",
         resolution: "3840 × 2160",
         size: "4K",
         description: "A clean and minimal modern desktop wallpaper."
@@ -31,7 +31,7 @@ window.wallpapers = [
         id: "motivational-wallpaper",
         title: "Motivational Wallpaper",
         category: "Motivational",
-        image: "https://i.ibb.co/zWy5w4pj/Mz-Jtnw1-N0-YF2-Va-WWcb1-KJsapv1-Qcibv-KHww-Jt-Ui-I.jpg",
+        image: "https://i.postimg.cc/Prsbqsk9/gods-plan-aesthetic-macos-wallpaper-36534.jpg",
         resolution: "3840 × 2160",
         size: "4K",
         description: "A motivational wallpaper for your desktop."
