@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wallpaper | Stillframe</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Google Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-zinc-900 text-zinc-200">
+
+    <div class="max-w-7xl mx-auto min-h-screen">
+
+        <!-- Header -->
+        <header class="flex justify-between items-center p-4 m-4 border border-zinc-700 rounded-full">
+
+            <a href="/" class="flex items-center gap-2">
+                <img src="/logo.png" class="h-8 rounded-xl" alt="Stillframe">
+                <h1 class="text-xl sm:text-2xl">stillframe.</h1>
+            </a>
+
+            <a href="/index.html"
+                class="border border-zinc-700 py-2 px-4 rounded-full text-sm hover:bg-zinc-800 transition">
+                Explore wallpapers ↗
+            </a>
+
+        </header>
+
+        <!-- Wallpaper Details -->
+        <main class="p-4 py-8">
+
+            <a href="/index.html" class="text-sm text-zinc-400 hover:text-lime-300">
+                ← Back to wallpapers
+            </a>
+
+            <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Image -->
+                <div class="lg:col-span-2">
+
+                    <div class="border border-zinc-700 rounded-2xl p-2">
+                        <img id="wallpaper-image" src="" alt=""
+                            class="w-full rounded-xl object-contain max-h-[650px] bg-zinc-950">
+                    </div>
+
+                </div>
+
+                <!-- Information -->
+                <div class="flex flex-col gap-5">
+
+                    <div>
+                        <span id="wallpaper-category" class="text-lime-300 text-sm font-medium">
+                        </span>
+
+                        <h2 id="wallpaper-title" class="text-3xl sm:text-4xl font-bold tracking-tight mt-3">
+                        </h2>
+
+                        <p id="wallpaper-description" class="text-zinc-400 mt-4 leading-relaxed">
+                        </p>
+                    </div>
+
+                    <div class="border border-zinc-700 rounded-2xl p-4 space-y-4">
+
+                        <h3 class="font-semibold text-lg">Wallpaper Information</h3>
+
+                        <div class="flex justify-between">
+                            <span class="text-zinc-400">Resolution</span>
+                            <span id="wallpaper-resolution"></span>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span class="text-zinc-400">Quality</span>
+                            <span id="wallpaper-size" class="text-lime-300"></span>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span class="text-zinc-400">Category</span>
+                            <span id="wallpaper-category-info"></span>
+                        </div>
+
+                    </div>
+
+                    <button id="download-button"
+                        class="w-full bg-lime-300 text-zinc-950 font-semibold text-center py-4 rounded-full hover:bg-lime-200 transition cursor-pointer">
+                        Download Wallpaper ↓
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="/js/wallpapers.js"></script>
+    <script src="/js/wallpaper.js"></script>
+
+</body>
+
+</html>
