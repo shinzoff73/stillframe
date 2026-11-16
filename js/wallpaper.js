@@ -2,6 +2,7 @@ const SITE_ORIGIN = "https://stillframe.youtubethumbgrabber.xyz";
 
 const params = new URLSearchParams(window.location.search);
 const wallpaperId = params.get("id");
+const shouldAutoDownload = params.get("autodownload") === "1";
 
 const wallpaper = Array.isArray(window.wallpapers)
     ? window.wallpapers.find(w => w.id === wallpaperId)
@@ -32,7 +33,7 @@ if (!wallpaper) {
     // Update SEO Meta Tags, Canonical URL & JSON-LD Schema
     updateWallpaperSEO(wallpaper);
 
-    // Update Breadcrumbs (if present in wallpaper.html)
+    // Update Breadcrumbs
     const categoryUrl = `/category.html?category=${encodeURIComponent(wallpaper.category)}`;
     const breadcrumbCatLink = document.getElementById("breadcrumb-category-link");
     if (breadcrumbCatLink) {
@@ -66,64 +67,36 @@ if (!wallpaper) {
     document.getElementById("wallpaper-resolution").textContent = wallpaper.resolution;
     document.getElementById("wallpaper-size").textContent = wallpaper.size;
 
-    // Download Wallpaper (Supports Instagram/In-App WebViews + Standard Browsers)
+    // Download Button Handler
     const downloadButton = document.getElementById("download-button");
 
-    downloadButton.addEventListener("click", async () => {
-        const originalText = downloadButton.textContent;
-        const fileName = getDownloadFileName(wallpaper);
-
-        // 1. Instagram / In-App Browser path (bypasses blocked blob: URLs)
+    downloadButton.addEventListener("click", () => {
+        // If inside Instagram / Facebook in-app browser, redirect to Chrome first with ?autodownload=1
         if (isInAppBrowser()) {
-            triggerDirectAttachmentDownload(wallpaper.image, fileName);
-            showInAppHelper(downloadButton, wallpaper.image);
-            downloadButton.textContent = "Starting Download...";
-            setTimeout(() => {
-                downloadButton.textContent = originalText;
-            }, 2500);
+            redirectToChromeForDownload(downloadButton, wallpaper.image);
             return;
         }
 
-        // 2. Standard Browser path (Chrome, Safari, Firefox, Edge, Desktop)
-        try {
-            downloadButton.disabled = true;
-            downloadButton.textContent = "Preparing Download...";
-
-            const response = await fetch(wallpaper.image);
-            if (!response.ok) throw new Error("Image download failed");
-
-            const blob = await response.blob();
-            const mimeType = blob.type || "image/jpeg";
-            const extension = mimeType.split("/")[1].split(";")[0] || "jpg";
-            const imageURL = URL.createObjectURL(blob);
-
-            const link = document.createElement("a");
-            link.href = imageURL;
-            link.download = `${wallpaper.id}.${extension}`;
-
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-
-            setTimeout(() => URL.revokeObjectURL(imageURL), 2000);
-            downloadButton.textContent = "Downloaded ✓";
-        } catch (error) {
-            console.error("Blob download failed, falling back to direct attachment:", error);
-            triggerDirectAttachmentDownload(wallpaper.image, fileName);
-            downloadButton.textContent = "Download Started ✓";
-        } finally {
-            downloadButton.disabled = false;
-            setTimeout(() => {
-                downloadButton.textContent = originalText;
-            }, 2500);
-        }
+        // Standard browser download
+        startWallpaperDownload(wallpaper, downloadButton);
     });
+
+    // If Chrome just opened from Instagram with ?autodownload=1, clean URL and start download automatically
+    if (shouldAutoDownload && !isInAppBrowser()) {
+        const cleanUrl = new URL(window.location.href);
+        cleanUrl.searchParams.delete("autodownload");
+        window.history.replaceState({}, "", cleanUrl.toString());
+
+        setTimeout(() => {
+            startWallpaperDownload(wallpaper, downloadButton);
+        }, 400);
+    }
 
     // Render 20 Optimized Recommendations (10 Same Category + 1 Ad + 10 Random Other Categories)
     initRecommendations(wallpaper);
 }
 
-// --- Download & In-App Browser Helpers ---
+// --- Download & Instagram-to-Chrome Redirect Helpers ---
 
 function isInAppBrowser() {
     const ua = navigator.userAgent || navigator.vendor || window.opera || "";
@@ -134,10 +107,91 @@ function isAndroid() {
     return /Android/i.test(navigator.userAgent || "");
 }
 
+function isIOS() {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent || "");
+}
+
+function getAutoDownloadPageUrl() {
+    const target = new URL(window.location.href);
+    target.searchParams.set("autodownload", "1");
+    return target.toString();
+}
+
 function getChromeIntentUrl(targetUrl) {
     const strippedUrl = targetUrl.replace(/^https?:\/\//i, "");
     const fallback = encodeURIComponent(targetUrl);
     return `intent://${strippedUrl}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${fallback};end`;
+}
+
+function getIOSChromeUrl(targetUrl) {
+    return targetUrl.replace(/^https:\/\//i, "googlechromes://").replace(/^http:\/\//i, "googlechrome://");
+}
+
+function redirectToChromeForDownload(buttonEl, imageUrl) {
+    const autoDownloadUrl = getAutoDownloadPageUrl();
+    const originalText = buttonEl.textContent;
+
+    if (isAndroid()) {
+        buttonEl.textContent = "Opening in Chrome...";
+        const intentUrl = getChromeIntentUrl(autoDownloadUrl);
+
+        // Synchronous top-level navigation so Android WebView honors the user gesture
+        window.location.href = intentUrl;
+
+        // If the WebView blocked the automatic intent redirect, show a manual one-tap Chrome button
+        setTimeout(() => {
+            if (document.visibilityState === "visible") {
+                buttonEl.textContent = originalText;
+                showInAppHelper(buttonEl, imageUrl, intentUrl);
+            }
+        }, 900);
+        return;
+    }
+
+    // iOS WKWebView blocks intent:// schemes, so show clear 2-tap instructions + optional Chrome scheme
+    showInAppHelper(buttonEl, imageUrl, isIOS() ? getIOSChromeUrl(autoDownloadUrl) : autoDownloadUrl);
+}
+
+function showInAppHelper(buttonEl, imageUrl, externalBrowserUrl) {
+    if (document.getElementById("inapp-download-tip")) return;
+
+    const tip = document.createElement("div");
+    tip.id = "inapp-download-tip";
+    tip.className = "p-4 rounded-2xl bg-zinc-950/90 border border-lime-300/30 text-xs text-zinc-300 space-y-3";
+
+    if (isAndroid()) {
+        tip.innerHTML = `
+            <div class="space-y-1">
+                <p class="font-semibold text-lime-300">Open in Chrome to download</p>
+                <p class="text-zinc-400 leading-relaxed">
+                    Instagram's browser blocks file downloads. Tap below to open this page in Chrome—your download will start automatically.
+                </p>
+            </div>
+            <a href="${externalBrowserUrl}"
+               class="flex items-center justify-center gap-1.5 w-full bg-lime-300 text-zinc-950 font-semibold py-2.5 px-4 rounded-full text-xs hover:bg-lime-200 transition">
+                Open in Chrome &amp; Download ↗
+            </a>
+        `;
+    } else {
+        tip.innerHTML = `
+            <div class="space-y-1">
+                <p class="font-semibold text-lime-300">Using Instagram's browser?</p>
+                <p class="text-zinc-400 leading-relaxed">
+                    Tap <strong>•••</strong> in the top corner and select <strong>Open in Browser</strong> to download automatically, or <strong>press and hold the wallpaper image</strong> and tap <strong>Save Image</strong>.
+                </p>
+            </div>
+            <a href="${externalBrowserUrl}"
+               class="flex items-center justify-center gap-1.5 w-full bg-lime-300 text-zinc-950 font-semibold py-2.5 px-4 rounded-full text-xs hover:bg-lime-200 transition">
+                Open in Chrome App ↗
+            </a>
+            <a href="${imageUrl}" target="_blank" rel="noopener"
+               class="block text-center text-lime-300 underline underline-offset-4 font-medium">
+                Open full-resolution image directly ↗
+            </a>
+        `;
+    }
+
+    buttonEl.insertAdjacentElement("afterend", tip);
 }
 
 function getDownloadFileName(w) {
@@ -157,39 +211,42 @@ function triggerDirectAttachmentDownload(imageUrl, fileName) {
     link.remove();
 }
 
-function showInAppHelper(buttonEl, imageUrl) {
-    if (document.getElementById("inapp-download-tip")) return;
+async function startWallpaperDownload(w, buttonEl) {
+    const originalText = buttonEl.textContent;
+    const fileName = getDownloadFileName(w);
 
-    const androidChromeButton = isAndroid()
-        ? `
-            <a href="${getChromeIntentUrl(window.location.href)}"
-               class="flex items-center justify-center gap-1.5 w-full bg-lime-300 text-zinc-950 font-semibold py-2.5 px-4 rounded-full text-xs hover:bg-lime-200 transition">
-                Open in Chrome ↗
-            </a>
-        `
-        : "";
+    try {
+        buttonEl.disabled = true;
+        buttonEl.textContent = "Preparing Download...";
 
-    const tip = document.createElement("div");
-    tip.id = "inapp-download-tip";
-    tip.className = "p-4 rounded-2xl bg-zinc-950/90 border border-lime-300/30 text-xs text-zinc-300 space-y-3";
-    tip.innerHTML = `
-        <div class="space-y-1">
-            <p class="font-semibold text-lime-300">Using Instagram's in-app browser?</p>
-            <p class="text-zinc-400 leading-relaxed">
-                Instagram blocks direct file downloads. ${
-                    isAndroid()
-                        ? "Open this page in Chrome for one-tap downloads, or press and hold the image to save."
-                        : "<strong>Press and hold the wallpaper image</strong> and tap <strong>Save Image</strong>, or tap <strong>•••</strong> at the top and select <strong>Open in Browser</strong>."
-                }
-            </p>
-        </div>
-        ${androidChromeButton}
-        <a href="${imageUrl}" target="_blank" rel="noopener"
-           class="block text-center text-lime-300 underline underline-offset-4 font-medium">
-            Open full-resolution image directly ↗
-        </a>
-    `;
-    buttonEl.insertAdjacentElement("afterend", tip);
+        const response = await fetch(w.image);
+        if (!response.ok) throw new Error("Image download failed");
+
+        const blob = await response.blob();
+        const mimeType = blob.type || "image/jpeg";
+        const extension = mimeType.split("/")[1].split(";")[0] || "jpg";
+        const imageURL = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = imageURL;
+        link.download = `${w.id}.${extension}`;
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        setTimeout(() => URL.revokeObjectURL(imageURL), 2000);
+        buttonEl.textContent = "Downloaded ✓";
+    } catch (error) {
+        console.error("Blob download failed, falling back to direct attachment:", error);
+        triggerDirectAttachmentDownload(w.image, fileName);
+        buttonEl.textContent = "Download Started ✓";
+    } finally {
+        buttonEl.disabled = false;
+        setTimeout(() => {
+            buttonEl.textContent = originalText;
+        }, 2500);
+    }
 }
 
 // --- Dynamic SEO & Structured Data Helper ---
@@ -320,7 +377,6 @@ function getRecommendedWallpapers(currentWallpaper) {
 
     let combined = [...pickedSame, ...pickedOther];
 
-    // If a category has fewer than 10 items, top up from remaining wallpapers to reach 20
     if (combined.length < 20) {
         const usedIds = new Set(combined.map(w => w.id));
         const remaining = shuffleArray(candidates.filter(w => !usedIds.has(w.id)));
