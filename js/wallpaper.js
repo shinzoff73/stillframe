@@ -161,28 +161,22 @@ function showInAppHelper(buttonEl, imageUrl, externalBrowserUrl) {
 
     if (isAndroid()) {
         tip.innerHTML = `
-            <div class="space-y-1">
-                <p class="font-semibold text-lime-300">Open in Chrome to download</p>
-                <p class="text-zinc-400 leading-relaxed">
-                    Instagram's browser blocks file downloads. Tap below to open this page in Chrome—your download will start automatically.
-                </p>
-            </div>
+            <p class="text-zinc-300 leading-relaxed">
+                To use all features we recommend external browser. Tap below to open this page in Chrome—your download will start automatically.
+            </p>
             <a href="${externalBrowserUrl}"
                class="flex items-center justify-center gap-1.5 w-full bg-lime-300 text-zinc-950 font-semibold py-2.5 px-4 rounded-full text-xs hover:bg-lime-200 transition">
-                Open in Chrome &amp; Download ↗
+                Open in Chrome ↗
             </a>
         `;
     } else {
         tip.innerHTML = `
-            <div class="space-y-1">
-                <p class="font-semibold text-lime-300">Using Instagram's browser?</p>
-                <p class="text-zinc-400 leading-relaxed">
-                    Tap <strong>•••</strong> in the top corner and select <strong>Open in Browser</strong> to download automatically, or <strong>press and hold the wallpaper image</strong> and tap <strong>Save Image</strong>.
-                </p>
-            </div>
+            <p class="text-zinc-300 leading-relaxed">
+                To use all features we recommend external browser. Tap below to open this page in Chrome—your download will start automatically (or tap <strong>•••</strong> → <strong>Open in Browser</strong>).
+            </p>
             <a href="${externalBrowserUrl}"
                class="flex items-center justify-center gap-1.5 w-full bg-lime-300 text-zinc-950 font-semibold py-2.5 px-4 rounded-full text-xs hover:bg-lime-200 transition">
-                Open in Chrome App ↗
+                Open in Chrome ↗
             </a>
             <a href="${imageUrl}" target="_blank" rel="noopener"
                class="block text-center text-lime-300 underline underline-offset-4 font-medium">
