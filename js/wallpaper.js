@@ -32,29 +32,59 @@ if (!wallpaper) {
     // Update SEO Meta Tags, Canonical URL & JSON-LD Schema
     updateWallpaperSEO(wallpaper);
 
+    // Update Breadcrumbs (if present in wallpaper.html)
+    const categoryUrl = `/category.html?category=${encodeURIComponent(wallpaper.category)}`;
+    const breadcrumbCatLink = document.getElementById("breadcrumb-category-link");
+    if (breadcrumbCatLink) {
+        breadcrumbCatLink.textContent = wallpaper.category;
+        breadcrumbCatLink.href = categoryUrl;
+    }
+
+    const breadcrumbTitle = document.getElementById("breadcrumb-title");
+    if (breadcrumbTitle) {
+        breadcrumbTitle.textContent = wallpaper.title;
+    }
+
     // Display main wallpaper
+    const altText = `${wallpaper.title} — ${wallpaper.size} (${wallpaper.resolution}) ${wallpaper.category} Wallpaper`;
     const mainImg = document.getElementById("wallpaper-image");
     mainImg.src = wallpaper.image;
-    mainImg.alt = `${wallpaper.title} — ${wallpaper.size} ${wallpaper.category} Wallpaper`;
+    mainImg.alt = altText;
+
+    const captionEl = document.getElementById("wallpaper-caption");
+    if (captionEl) captionEl.textContent = altText;
 
     // Display wallpaper information
     document.getElementById("wallpaper-title").textContent = wallpaper.title;
 
     const categoryBadge = document.getElementById("wallpaper-category");
     categoryBadge.textContent = wallpaper.category;
-    categoryBadge.href = `/category.html?category=${encodeURIComponent(wallpaper.category)}`;
+    categoryBadge.href = categoryUrl;
 
     document.getElementById("wallpaper-category-info").textContent = wallpaper.category;
     document.getElementById("wallpaper-description").textContent = wallpaper.description;
     document.getElementById("wallpaper-resolution").textContent = wallpaper.resolution;
     document.getElementById("wallpaper-size").textContent = wallpaper.size;
 
-    // Download Wallpaper
+    // Download Wallpaper (Supports Instagram/In-App WebViews + Standard Browsers)
     const downloadButton = document.getElementById("download-button");
 
     downloadButton.addEventListener("click", async () => {
         const originalText = downloadButton.textContent;
+        const fileName = getDownloadFileName(wallpaper);
 
+        // 1. Instagram / In-App Browser path (bypasses blocked blob: URLs)
+        if (isInAppBrowser()) {
+            triggerDirectAttachmentDownload(wallpaper.image, fileName);
+            showInAppHelper(downloadButton, wallpaper.image);
+            downloadButton.textContent = "Starting Download...";
+            setTimeout(() => {
+                downloadButton.textContent = originalText;
+            }, 2500);
+            return;
+        }
+
+        // 2. Standard Browser path (Chrome, Safari, Firefox, Edge, Desktop)
         try {
             downloadButton.disabled = true;
             downloadButton.textContent = "Preparing Download...";
@@ -78,9 +108,9 @@ if (!wallpaper) {
             setTimeout(() => URL.revokeObjectURL(imageURL), 2000);
             downloadButton.textContent = "Downloaded ✓";
         } catch (error) {
-            console.error("Download error:", error);
-            downloadButton.textContent = "Download Failed";
-            alert("Unable to download this wallpaper. Your image host may be blocking external downloads.");
+            console.error("Blob download failed, falling back to direct attachment:", error);
+            triggerDirectAttachmentDownload(wallpaper.image, fileName);
+            downloadButton.textContent = "Download Started ✓";
         } finally {
             downloadButton.disabled = false;
             setTimeout(() => {
@@ -93,12 +123,83 @@ if (!wallpaper) {
     initRecommendations(wallpaper);
 }
 
+// --- Download & In-App Browser Helpers ---
+
+function isInAppBrowser() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera || "";
+    return /Instagram|FBAN|FBAV|FB_IAB|Line|Snapchat|Twitter|wv/i.test(ua);
+}
+
+function isAndroid() {
+    return /Android/i.test(navigator.userAgent || "");
+}
+
+function getChromeIntentUrl(targetUrl) {
+    const strippedUrl = targetUrl.replace(/^https?:\/\//i, "");
+    const fallback = encodeURIComponent(targetUrl);
+    return `intent://${strippedUrl}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${fallback};end`;
+}
+
+function getDownloadFileName(w) {
+    const rawExt = (w.image.split("?")[0].split(".").pop() || "jpg").toLowerCase();
+    const safeExt = ["jpg", "jpeg", "png", "webp"].includes(rawExt) ? rawExt : "jpg";
+    return `${w.id}.${safeExt}`;
+}
+
+function triggerDirectAttachmentDownload(imageUrl, fileName) {
+    const attachmentUrl = `https://wsrv.nl/?url=${encodeURIComponent(imageUrl)}&filename=${encodeURIComponent(fileName)}&q=100`;
+    const link = document.createElement("a");
+    link.href = attachmentUrl;
+    link.download = fileName;
+    link.rel = "noopener";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+}
+
+function showInAppHelper(buttonEl, imageUrl) {
+    if (document.getElementById("inapp-download-tip")) return;
+
+    const androidChromeButton = isAndroid()
+        ? `
+            <a href="${getChromeIntentUrl(window.location.href)}"
+               class="flex items-center justify-center gap-1.5 w-full bg-lime-300 text-zinc-950 font-semibold py-2.5 px-4 rounded-full text-xs hover:bg-lime-200 transition">
+                Open in Chrome ↗
+            </a>
+        `
+        : "";
+
+    const tip = document.createElement("div");
+    tip.id = "inapp-download-tip";
+    tip.className = "p-4 rounded-2xl bg-zinc-950/90 border border-lime-300/30 text-xs text-zinc-300 space-y-3";
+    tip.innerHTML = `
+        <div class="space-y-1">
+            <p class="font-semibold text-lime-300">Using Instagram's in-app browser?</p>
+            <p class="text-zinc-400 leading-relaxed">
+                Instagram blocks direct file downloads. ${
+                    isAndroid()
+                        ? "Open this page in Chrome for one-tap downloads, or press and hold the image to save."
+                        : "<strong>Press and hold the wallpaper image</strong> and tap <strong>Save Image</strong>, or tap <strong>•••</strong> at the top and select <strong>Open in Browser</strong>."
+                }
+            </p>
+        </div>
+        ${androidChromeButton}
+        <a href="${imageUrl}" target="_blank" rel="noopener"
+           class="block text-center text-lime-300 underline underline-offset-4 font-medium">
+            Open full-resolution image directly ↗
+        </a>
+    `;
+    buttonEl.insertAdjacentElement("afterend", tip);
+}
+
 // --- Dynamic SEO & Structured Data Helper ---
 
 function updateWallpaperSEO(w) {
     const pageTitle = `${w.title} (${w.size} ${w.category} Wallpaper) | stillframe.`;
     const canonicalUrl = `${SITE_ORIGIN}/wallpaper.html?id=${encodeURIComponent(w.id)}`;
+    const categoryCanonicalUrl = `${SITE_ORIGIN}/category.html?category=${encodeURIComponent(w.category)}`;
     const pageDesc = w.description || `Download ${w.title} in ${w.resolution} (${w.size}) resolution for free at stillframe.`;
+    const imageAlt = `${w.title} — ${w.size} ${w.category} Wallpaper`;
 
     document.title = pageTitle;
 
@@ -114,30 +215,64 @@ function updateWallpaperSEO(w) {
     setMeta('meta[property="og:description"]', "content", pageDesc);
     setMeta('meta[property="og:url"]', "content", canonicalUrl);
     setMeta('meta[property="og:image"]', "content", w.image);
+    setMeta('meta[property="og:image:alt"]', "content", imageAlt);
 
     setMeta('meta[name="twitter:title"]', "content", pageTitle);
     setMeta('meta[name="twitter:description"]', "content", pageDesc);
     setMeta('meta[name="twitter:image"]', "content", w.image);
+    setMeta('meta[name="twitter:image:alt"]', "content", imageAlt);
 
     const schemaEl = document.getElementById("wallpaper-schema");
     if (schemaEl) {
         const [width, height] = (w.resolution || "").split("×").map(s => s.trim());
         schemaEl.textContent = JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ImageObject",
-            "name": w.title,
-            "description": pageDesc,
-            "contentUrl": w.image,
-            "url": canonicalUrl,
-            "width": width || undefined,
-            "height": height || undefined,
-            "encodingFormat": w.image.endsWith(".png") ? "image/png" : "image/jpeg",
-            "acquireLicensePage": `${SITE_ORIGIN}/pages/terms.html`,
-            "creator": {
-                "@type": "Organization",
-                "name": "stillframe.",
-                "url": SITE_ORIGIN
-            }
+            "@graph": [
+                {
+                    "@type": "ImageObject",
+                    "@id": `${canonicalUrl}#image`,
+                    "name": w.title,
+                    "description": pageDesc,
+                    "contentUrl": w.image,
+                    "url": canonicalUrl,
+                    "representativeOfPage": true,
+                    "width": width ? Number(width) : undefined,
+                    "height": height ? Number(height) : undefined,
+                    "encodingFormat": w.image.toLowerCase().endsWith(".png") ? "image/png" : "image/jpeg",
+                    "license": `${SITE_ORIGIN}/pages/terms.html`,
+                    "acquireLicensePage": `${SITE_ORIGIN}/pages/terms.html`,
+                    "creditText": "stillframe.",
+                    "creator": {
+                        "@type": "Organization",
+                        "name": "stillframe.",
+                        "url": SITE_ORIGIN
+                    }
+                },
+                {
+                    "@type": "BreadcrumbList",
+                    "@id": `${canonicalUrl}#breadcrumb`,
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "Home",
+                            "item": `${SITE_ORIGIN}/`
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 2,
+                            "name": w.category,
+                            "item": categoryCanonicalUrl
+                        },
+                        {
+                            "@type": "ListItem",
+                            "position": 3,
+                            "name": w.title,
+                            "item": canonicalUrl
+                        }
+                    ]
+                }
+            ]
         });
     }
 }
@@ -225,7 +360,7 @@ function initRecommendations(currentWallpaper) {
                          data-index="${index}"
                          src="${w.thumb || getScaledUrl(w.image, 320, 40)}"
                          onerror="this.onerror=null; this.src=this.dataset.full; this.classList.remove('blur-sm', 'scale-105');"
-                         alt="${w.title}"
+                         alt="${w.title} — ${w.size} ${w.category} Wallpaper"
                          loading="lazy"
                          decoding="async"
                          class="w-full h-full object-cover blur-sm scale-105 group-hover:scale-[1.02] transition-all duration-700">

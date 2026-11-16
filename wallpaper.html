@@ -9,7 +9,7 @@
     <title>Wallpaper | stillframe.</title>
     <meta name="description"
         content="Download free 2K and 4K high-resolution wallpapers for desktop and mobile screens at stillframe.">
-    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://stillframe.youtubethumbgrabber.xyz/wallpaper.html">
 
     <!-- Open Graph / Social Meta Tags -->
@@ -21,6 +21,7 @@
     <meta property="og:url" content="https://stillframe.youtubethumbgrabber.xyz/wallpaper.html">
     <meta property="og:image"
         content="https://stillframe.youtubethumbgrabber.xyz/MacBook%20Pro%20with%20Painted%20Sunset%20Lock%20Screen.png">
+    <meta property="og:image:alt" content="High-resolution desktop wallpaper preview from stillframe.">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -29,6 +30,7 @@
         content="Download free 2K and 4K high-resolution wallpapers for desktop and mobile screens at stillframe.">
     <meta name="twitter:image"
         content="https://stillframe.youtubethumbgrabber.xyz/MacBook%20Pro%20with%20Painted%20Sunset%20Lock%20Screen.png">
+    <meta name="twitter:image:alt" content="High-resolution desktop wallpaper preview from stillframe.">
 
     <!-- Favicon & Theme Color -->
     <link rel="icon" href="/logo.png" type="image/png">
@@ -50,7 +52,7 @@
         }
     </style>
 
-    <!-- Dynamic ImageObject JSON-LD Placeholder -->
+    <!-- Dynamic ImageObject + BreadcrumbList JSON-LD Placeholder -->
     <script type="application/ld+json" id="wallpaper-schema">{}</script>
 
     <!-- Load AdSense script once -->
@@ -64,7 +66,7 @@
     <div class="max-w-7xl mx-auto min-h-screen flex flex-col">
 
         <!-- Header -->
-          <header class="sticky top-4 z-50 mx-4 my-4">
+        <header class="sticky top-4 z-50 mx-4 my-4">
             <div
                 class="flex items-center justify-between px-5 py-2.5 rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 shadow-lg shadow-black/20">
 
@@ -80,14 +82,15 @@
                 <!-- Center: Desktop Nav Links -->
                 <nav aria-label="Main Navigation"
                     class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-                    <a href="#categories" class="hover:text-white transition-colors duration-200">Categories</a>
+                    <a href="/index.html#categories"
+                        class="hover:text-white transition-colors duration-200">Categories</a>
                     <a href="/pages/about.html" class="hover:text-white transition-colors duration-200">About</a>
                     <a href="/pages/contact.html" class="hover:text-white transition-colors duration-200">Contact</a>
                 </nav>
 
                 <!-- Right: CTA + Mobile Toggle -->
                 <div class="flex items-center gap-2">
-                    <a href="#wallpaper-grid"
+                    <a href="/index.html#wallpaper-grid"
                         class="bg-lime-300 text-zinc-950 font-medium py-1.5 px-3.5 sm:px-4 rounded-full text-xs sm:text-sm hover:bg-lime-200 transition duration-200 sm:block hidden">
                         Explore wallpapers ↗
                     </a>
@@ -105,7 +108,7 @@
             <!-- Mobile Dropdown Menu -->
             <nav id="mobile-menu" aria-label="Mobile Navigation"
                 class="hidden md:hidden mt-2 p-4 rounded-2xl bg-zinc-900/95 backdrop-blur-md border border-zinc-800 shadow-xl flex-col gap-3 text-sm font-medium text-zinc-300">
-                <a href="#categories"
+                <a href="/index.html#categories"
                     class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">Categories</a>
                 <a href="/pages/about.html"
                     class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">About</a>
@@ -126,21 +129,29 @@
         <!-- Wallpaper Details -->
         <main id="wallpaper-main" class="p-4 py-8 flex-1">
 
-            <a href="/index.html" class="text-sm text-zinc-400 hover:text-lime-300 transition-colors">
-                ← Back to wallpapers
-            </a>
+            <!-- Semantic Breadcrumb Navigation -->
+            <nav aria-label="Breadcrumb" class="flex flex-wrap items-center gap-2 text-sm text-zinc-400">
+                <a href="/index.html" class="hover:text-lime-300 transition-colors">Home</a>
+                <span aria-hidden="true">/</span>
+                <a id="breadcrumb-category-link" href="/category.html"
+                    class="hover:text-lime-300 transition-colors">Category</a>
+                <span aria-hidden="true">/</span>
+                <span id="breadcrumb-title" class="text-zinc-200 font-medium truncate max-w-[240px] sm:max-w-md"
+                    aria-current="page">Wallpaper</span>
+            </nav>
 
-            <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <article class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-                <!-- Image -->
-                <div class="lg:col-span-2">
-                    <div class="border border-zinc-700 rounded-2xl p-2">
+                <!-- Image Preview -->
+                <figure class="lg:col-span-2">
+                    <div class="border border-zinc-700 rounded-2xl p-2 bg-zinc-950/40">
                         <img id="wallpaper-image" src="" alt="" fetchpriority="high" decoding="async"
                             class="w-full rounded-xl object-contain max-h-[650px] bg-zinc-950">
                     </div>
-                </div>
+                    <figcaption id="wallpaper-caption" class="sr-only"></figcaption>
+                </figure>
 
-                <!-- Information -->
+                <!-- Information & Download -->
                 <div class="flex flex-col gap-5">
                     <div>
                         <a id="wallpaper-category" href="/category.html"
@@ -169,15 +180,20 @@
                             <span class="text-zinc-400">Category</span>
                             <span id="wallpaper-category-info"></span>
                         </div>
+
+                        <div class="flex justify-between">
+                            <span class="text-zinc-400">License</span>
+                            <span class="text-zinc-300">Free Personal Use</span>
+                        </div>
                     </div>
 
-                    <button id="download-button"
+                    <button id="download-button" type="button"
                         class="w-full bg-lime-300 text-zinc-950 font-semibold text-center py-4 rounded-full hover:bg-lime-200 transition cursor-pointer">
                         Download Wallpaper ↓
                     </button>
                 </div>
 
-            </div>
+            </article>
 
             <!-- Recommendations Section -->
             <section id="recommendations-section" aria-labelledby="recommendations-heading"
@@ -197,6 +213,13 @@
                 <div id="recommendations-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 </div>
             </section>
+
+            <noscript>
+                <p class="mt-6 text-sm text-zinc-400">
+                    JavaScript is required to load the wallpaper preview and download tool. Browse all collections on
+                    the <a href="/index.html" class="text-lime-300 underline">stillframe. homepage</a>.
+                </p>
+            </noscript>
 
         </main>
 
