@@ -2,41 +2,59 @@
 <html lang="en" class="scroll-smooth">
 
 <head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BXT4SKHJBD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-BXT4SKHJBD');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO Meta Tags -->
     <title>Contact Us | stillframe.</title>
     <meta name="description"
-        content="Contact Stillframe with questions, wallpaper requests, feedback or copyright takedown requests.">
+        content="Contact stillframe. with wallpaper requests, bug reports, feedback, or copyright takedown inquiries.">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://stillframe.youtubethumbgrabber.xyz/contact.html">
+
+    <!-- Open Graph / Social Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="stillframe.">
+    <meta property="og:title" content="Contact Us | stillframe.">
+    <meta property="og:description"
+        content="Have a wallpaper suggestion, found a bug, or need support? Get in touch with the stillframe. team.">
+    <meta property="og:url" content="https://stillframe.youtubethumbgrabber.xyz/contact.html">
+    <meta property="og:image"
+        content="https://stillframe.youtubethumbgrabber.xyz/MacBook%20Pro%20with%20Painted%20Sunset%20Lock%20Screen.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact Us | stillframe.">
+    <meta name="twitter:description"
+        content="Have a wallpaper suggestion, found a bug, or need support? Get in touch with the stillframe. team.">
+    <meta name="twitter:image"
+        content="https://stillframe.youtubethumbgrabber.xyz/MacBook%20Pro%20with%20Painted%20Sunset%20Lock%20Screen.png">
+
+    <!-- Favicon & Theme Color -->
+    <link rel="icon" href="/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <meta name="theme-color" content="#18181b">
+
+    <!-- Performance Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="shortcut icon" href="/logo.png" type="image/x-icon">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
-
-        .doc h2 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #fff;
-            margin: 2rem 0 .5rem;
-        }
-
-        .doc p,
-        .doc li {
-            color: #a1a1aa;
-            line-height: 1.75;
-            margin: .5rem 0;
-        }
-
-        .doc ul {
-            list-style: disc;
-            padding-left: 1.4rem;
-        }
-
-        .doc a {
-            color: #bef264;
-            text-decoration: underline;
-        }
     </style>
+
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2179785225331533"
         crossorigin="anonymous"></script>
 </head>
@@ -45,7 +63,7 @@
     <div class="max-w-7xl mx-auto min-h-screen flex flex-col">
 
         <!-- Header -->
-          <header class="sticky top-4 z-50 mx-4 my-4">
+        <header class="sticky top-4 z-50 mx-4 my-4">
             <div
                 class="flex items-center justify-between px-5 py-2.5 rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 shadow-lg shadow-black/20">
 
@@ -61,14 +79,15 @@
                 <!-- Center: Desktop Nav Links -->
                 <nav aria-label="Main Navigation"
                     class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-                    <a href="#categories" class="hover:text-white transition-colors duration-200">Categories</a>
-                    <a href="/pages/about.html" class="hover:text-white transition-colors duration-200">About</a>
-                    <a href="/pages/contact.html" class="hover:text-white transition-colors duration-200">Contact</a>
+                    <a href="/index.html#categories"
+                        class="hover:text-white transition-colors duration-200">Categories</a>
+                    <a href="/about.html" class="hover:text-white transition-colors duration-200">About</a>
+                    <a href="/contact.html" class="text-white transition-colors duration-200">Contact</a>
                 </nav>
 
                 <!-- Right: CTA + Mobile Toggle -->
                 <div class="flex items-center gap-2">
-                    <a href="#wallpaper-grid"
+                    <a href="/index.html#wallpaper-grid"
                         class="bg-lime-300 text-zinc-950 font-medium py-1.5 px-3.5 sm:px-4 rounded-full text-xs sm:text-sm hover:bg-lime-200 transition duration-200 sm:block hidden">
                         Explore wallpapers ↗
                     </a>
@@ -86,44 +105,144 @@
             <!-- Mobile Dropdown Menu -->
             <nav id="mobile-menu" aria-label="Mobile Navigation"
                 class="hidden md:hidden mt-2 p-4 rounded-2xl bg-zinc-900/95 backdrop-blur-md border border-zinc-800 shadow-xl flex-col gap-3 text-sm font-medium text-zinc-300">
-                <a href="#categories"
+                <a href="/index.html#categories"
                     class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">Categories</a>
                 <a href="/about.html"
                     class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">About</a>
-                <a href="/contact.html"
-                    class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">Contact</a>
+                <a href="/contact.html" class="px-3 py-2 rounded-xl bg-zinc-800 text-white transition">Contact</a>
             </nav>
         </header>
+
         <!-- Main Content -->
-        <main class="doc max-w-3xl mx-auto px-6 py-8 flex-1 w-full">
-            <h1 class="text-4xl font-bold tracking-tight text-white">Contact Us</h1>
-            <p class="mt-4">We read every message and usually reply within 3 to 5 business days. Email us at <a
-                    href="mailto:contact@youtubethumbgrabber.xyz">contact@youtubethumbgrabber.xyz</a> or use the form below.</p>
-            <form id="cf" class="mt-6 space-y-4">
-                <label class="block text-sm text-zinc-300">Your name<input id="n" required
-                        class="mt-1 w-full rounded-xl bg-zinc-800 border border-zinc-700 p-3 text-white focus:outline-none focus:border-lime-300 transition"></label>
-                <label class="block text-sm text-zinc-300">Your email<input id="e" type="email" required
-                        class="mt-1 w-full rounded-xl bg-zinc-800 border border-zinc-700 p-3 text-white focus:outline-none focus:border-lime-300 transition"></label>
-                <label class="block text-sm text-zinc-300">Message<textarea id="m" rows="6" required
-                        class="mt-1 w-full rounded-xl bg-zinc-800 border border-zinc-700 p-3 text-white focus:outline-none focus:border-lime-300 transition"></textarea></label>
-                <button
-                    class="w-full bg-lime-300 text-zinc-950 font-semibold py-3 rounded-full hover:bg-lime-200 transition cursor-pointer">Send
-                    message</button>
-                <p class="text-xs">This opens your email app with the message filled in.</p>
-            </form>
-            <h2>Copyright and takedown requests</h2>
-            <p>See our <a href="/pages/disclaimer.html">Disclaimer &amp; Copyright</a> page for what to include.</p>
-            <script>
-                document.getElementById("cf").addEventListener("submit", function (x) {
-                    x.preventDefault();
-                    var b = "Name: " + n.value + "\nEmail: " + e.value + "\n\n" + m.value;
-                    location.href = "mailto:contact@youtubethumbgrabber.xyz?subject=" + encodeURIComponent("Stillframe contact from " + n.value) + "&body=" + encodeURIComponent(b);
-                });
-            </script>
+        <main class="max-w-4xl mx-auto px-4 py-10 flex-1 w-full">
+
+            <!-- Page Hero -->
+            <div class="text-center mb-12">
+                <span
+                    class="inline-block px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-lime-300/10 text-lime-300 border border-lime-300/20">
+                    Get in Touch
+                </span>
+                <h1 class="text-4xl sm:text-6xl font-bold mt-4 tracking-tight text-white">
+                    Contact <span class="text-lime-300">Us.</span>
+                </h1>
+                <p class="text-zinc-400 mt-4 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
+                    Have a wallpaper suggestion, found a broken download, or just want to say hi? We'd love to hear from
+                    you.
+                </p>
+            </div>
+
+            <!-- 2-Column Form + Info Sidebar -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+                <!-- Contact Form Card -->
+                <div class="md:col-span-2 bg-zinc-950/70 border border-zinc-800 rounded-3xl p-6 sm:p-8">
+                    <div id="formWrapper">
+                        <h2 class="text-xl font-semibold text-white mb-6">Send a message</h2>
+
+                        <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                            <input type="hidden" name="access_key" value="4a92a267-857b-4e92-ab8c-82588e0ef61b">
+                            <input type="hidden" name="subject"
+                                value="stillframe.youtubethumbgrabber.xyz Contact Form Submission">
+                            <input type="hidden" name="redirect"
+                                value="https://stillframe.youtubethumbgrabber.xyz/contact.html?success=true">
+                            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="flex flex-col gap-1.5">
+                                    <label for="name" class="text-sm font-medium text-zinc-300">Your name</label>
+                                    <input id="name" name="name" type="text" placeholder="Your name" required
+                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-lime-300 transition-colors duration-150" />
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <label for="email" class="text-sm font-medium text-zinc-300">Email address</label>
+                                    <input id="email" name="email" type="email" placeholder="you@example.com" required
+                                        class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-lime-300 transition-colors duration-150" />
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-1.5">
+                                <label for="message" class="text-sm font-medium text-zinc-300">Message</label>
+                                <textarea id="message" name="message" rows="5"
+                                    placeholder="Tell us what's on your mind..." required
+                                    class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-lime-300 transition-colors duration-150 resize-none"></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full bg-lime-300 text-zinc-950 text-sm font-semibold py-3.5 rounded-full hover:bg-lime-200 transition duration-200 cursor-pointer">
+                                Send message ↗
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Success State (Shown when ?success=true in URL) -->
+                    <div id="successMsg" class="hidden flex-col items-center text-center py-10">
+                        <div
+                            class="w-14 h-14 rounded-full bg-lime-300/15 border border-lime-300/30 flex items-center justify-center text-lime-300 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="size-7">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Message sent!</h3>
+                        <p class="text-zinc-400 text-sm max-w-sm">
+                            Thanks for reaching out to stillframe. We'll get back to you within 1–2 business days.
+                        </p>
+                        <a href="/pages/contact.html"
+                            class="mt-6 inline-block px-5 py-2.5 rounded-full border border-zinc-800 text-xs font-medium text-zinc-300 hover:text-white hover:border-zinc-700 transition">
+                            Send another message
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Info Cards -->
+                <div class="flex flex-col gap-5">
+
+                    <!-- Direct Email -->
+                    
+
+                    <!-- Response Time -->
+                    <div class="bg-zinc-950/70 border border-zinc-800 rounded-3xl p-5">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-lime-300 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-sm font-semibold text-white mb-1">Response time</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed">We typically reply within 1–2 business days.</p>
+                    </div>
+
+                    <!-- Common Topics -->
+                    <div class="bg-zinc-950/70 border border-zinc-800 rounded-3xl p-5">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-lime-300 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-sm font-semibold text-white mb-1">Common topics</h3>
+                        <ul class="text-zinc-400 text-sm space-y-1.5 mt-2">
+                            <li><span class="text-lime-300">→</span> Wallpaper requests</li>
+                            <li><span class="text-lime-300">→</span> Broken download reports</li>
+                            <li><span class="text-lime-300">→</span> <a href="/pages/disclaimer.html"
+                                    class="hover:text-white underline underline-offset-2">Copyright / DMCA</a></li>
+                            <li><span class="text-lime-300">→</span> General feedback</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
         </main>
 
-        <!-- Footer -->
-        <footer class="max-w-7xl mx-auto px-4 pt-12 pb-6">
+    </div>
+
+    <!-- Footer -->
+    <footer class="max-w-7xl mx-auto px-4 pt-12 pb-6">
         <div class="rounded-3xl bg-zinc-950/80 border border-zinc-800 p-6 sm:p-10">
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-8 border-b border-zinc-800/80">
@@ -181,8 +300,8 @@
                         <li><a href="/index.html" class="hover:text-lime-300 transition-colors">Home</a></li>
                         <li><a href="/index.html#wallpaper-grid" class="hover:text-lime-300 transition-colors">All
                                 Wallpapers</a></li>
-                        <li><a href="/pages/about.html" class="hover:text-lime-300 transition-colors">About</a></li>
-                        <li><a href="/pages/contact.html" class="hover:text-lime-300 transition-colors">Contact</a></li>
+                        <li><a href="/about.html" class="hover:text-lime-300 transition-colors">About</a></li>
+                        <li><a href="/contact.html" class="hover:text-lime-300 transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
@@ -216,9 +335,8 @@
         </div>
     </footer>
 
-    </div>
-
     <script>
+        // Mobile Menu Toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
@@ -227,6 +345,15 @@
             mobileMenu.classList.toggle('flex', !isHidden);
             menuBtn.setAttribute('aria-expanded', String(!isHidden));
         });
+
+        // Show success message when Web3Forms redirects with ?success=true
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            document.getElementById('formWrapper').classList.add('hidden');
+            const successMsg = document.getElementById('successMsg');
+            successMsg.classList.remove('hidden');
+            successMsg.classList.add('flex');
+        }
     </script>
 </body>
 
