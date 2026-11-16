@@ -65,13 +65,15 @@ window.wallpapers.forEach((w, index) => {
     const count = index + 1;
     if (count % adInterval === 0 && count < window.wallpapers.length) {
         itemsHtml.push(`
-           <div>
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2179785225331533"
-                data-ad-slot="1507326584" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+            <div class="col-span-full my-3 p-4 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 flex flex-col items-center justify-center min-h-[140px]">
+                <span class="text-[11px] uppercase tracking-wider text-zinc-500 mb-2">Sponsored</span>
+                <ins class="adsbygoogle w-full"
+                     style="display:block"
+                     data-ad-client="ca-pub-2179785225331533"
+                     data-ad-slot="1507326584"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
         `);
     }
 });

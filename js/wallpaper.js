@@ -1,29 +1,49 @@
+const SITE_ORIGIN = "https://stillframe.youtubethumbgrabber.xyz";
+
 const params = new URLSearchParams(window.location.search);
 const wallpaperId = params.get("id");
 
-const wallpaper = window.wallpapers.find(w => w.id === wallpaperId);
+const wallpaper = Array.isArray(window.wallpapers)
+    ? window.wallpapers.find(w => w.id === wallpaperId)
+    : null;
 
 if (!wallpaper) {
-    document.body.innerHTML = `
-        <div class="min-h-screen flex flex-col items-center justify-center text-white">
-            <h1 class="text-4xl font-bold">404</h1>
-            <p class="text-zinc-400 mt-3">Wallpaper not found.</p>
-            <a href="/index.html" class="mt-5 text-lime-300">
-                Back to Home →
-            </a>
-        </div>
-    `;
+    document.title = "Wallpaper Not Found | stillframe.";
+
+    const robotsMeta = document.querySelector('meta[name="robots"]');
+    if (robotsMeta) robotsMeta.setAttribute("content", "noindex, follow");
+
+    const mainEl = document.getElementById("wallpaper-main");
+    if (mainEl) {
+        mainEl.innerHTML = `
+            <div class="min-h-[50vh] flex flex-col items-center justify-center text-center px-4">
+                <h1 class="text-5xl font-bold text-white">404</h1>
+                <p class="text-zinc-400 mt-3 max-w-md">
+                    We couldn't find that wallpaper. It may have been moved or the link is outdated.
+                </p>
+                <a href="/index.html"
+                   class="mt-6 bg-lime-300 text-zinc-950 font-semibold px-6 py-3 rounded-full text-sm hover:bg-lime-200 transition">
+                    Back to Home →
+                </a>
+            </div>
+        `;
+    }
 } else {
-    document.title = `${wallpaper.title} | Stillframe`;
+    // Update SEO Meta Tags, Canonical URL & JSON-LD Schema
+    updateWallpaperSEO(wallpaper);
 
     // Display main wallpaper
     const mainImg = document.getElementById("wallpaper-image");
     mainImg.src = wallpaper.image;
-    mainImg.alt = wallpaper.title;
+    mainImg.alt = `${wallpaper.title} — ${wallpaper.size} ${wallpaper.category} Wallpaper`;
 
     // Display wallpaper information
     document.getElementById("wallpaper-title").textContent = wallpaper.title;
-    document.getElementById("wallpaper-category").textContent = wallpaper.category;
+
+    const categoryBadge = document.getElementById("wallpaper-category");
+    categoryBadge.textContent = wallpaper.category;
+    categoryBadge.href = `/category.html?category=${encodeURIComponent(wallpaper.category)}`;
+
     document.getElementById("wallpaper-category-info").textContent = wallpaper.category;
     document.getElementById("wallpaper-description").textContent = wallpaper.description;
     document.getElementById("wallpaper-resolution").textContent = wallpaper.resolution;
@@ -71,6 +91,55 @@ if (!wallpaper) {
 
     // Render 20 Optimized Recommendations (10 Same Category + 1 Ad + 10 Random Other Categories)
     initRecommendations(wallpaper);
+}
+
+// --- Dynamic SEO & Structured Data Helper ---
+
+function updateWallpaperSEO(w) {
+    const pageTitle = `${w.title} (${w.size} ${w.category} Wallpaper) | stillframe.`;
+    const canonicalUrl = `${SITE_ORIGIN}/wallpaper.html?id=${encodeURIComponent(w.id)}`;
+    const pageDesc = w.description || `Download ${w.title} in ${w.resolution} (${w.size}) resolution for free at stillframe.`;
+
+    document.title = pageTitle;
+
+    const setMeta = (selector, attr, value) => {
+        const el = document.querySelector(selector);
+        if (el) el.setAttribute(attr, value);
+    };
+
+    setMeta('meta[name="description"]', "content", pageDesc);
+    setMeta('link[rel="canonical"]', "href", canonicalUrl);
+
+    setMeta('meta[property="og:title"]', "content", pageTitle);
+    setMeta('meta[property="og:description"]', "content", pageDesc);
+    setMeta('meta[property="og:url"]', "content", canonicalUrl);
+    setMeta('meta[property="og:image"]', "content", w.image);
+
+    setMeta('meta[name="twitter:title"]', "content", pageTitle);
+    setMeta('meta[name="twitter:description"]', "content", pageDesc);
+    setMeta('meta[name="twitter:image"]', "content", w.image);
+
+    const schemaEl = document.getElementById("wallpaper-schema");
+    if (schemaEl) {
+        const [width, height] = (w.resolution || "").split("×").map(s => s.trim());
+        schemaEl.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ImageObject",
+            "name": w.title,
+            "description": pageDesc,
+            "contentUrl": w.image,
+            "url": canonicalUrl,
+            "width": width || undefined,
+            "height": height || undefined,
+            "encodingFormat": w.image.endsWith(".png") ? "image/png" : "image/jpeg",
+            "acquireLicensePage": `${SITE_ORIGIN}/pages/terms.html`,
+            "creator": {
+                "@type": "Organization",
+                "name": "stillframe.",
+                "url": SITE_ORIGIN
+            }
+        });
+    }
 }
 
 // --- Recommendation & Progressive Loading Helpers ---
@@ -172,30 +241,43 @@ function initRecommendations(currentWallpaper) {
             </a>
         `);
 
-        // Insert 1 AdSense block right after the 10th wallpaper
+        // Insert 1 full-width AdSense block right after the 10th wallpaper
         if (index + 1 === 10 && recommendations.length > 10) {
             itemsHtml.push(`
-                 <div>
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2179785225331533"
-                data-ad-slot="1507326584" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+                <div class="col-span-full my-3 p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800/80 flex flex-col items-center justify-center min-h-[250px]">
+                    <span class="text-[10px] uppercase tracking-widest text-zinc-500 mb-2">Advertisement</span>
+                    <ins class="adsbygoogle lazy-rec-ad w-full"
+                         style="display:block"
+                         data-ad-client="ca-pub-2179785225331533"
+                         data-ad-slot="1507326584"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                </div>
             `);
         }
     });
 
     recGrid.innerHTML = itemsHtml.join("");
 
-    // Initialize the single injected AdSense unit
-    const injectedAd = recGrid.querySelector("ins.adsbygoogle");
-    if (injectedAd && !injectedAd.dataset.adStatus) {
-        try {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (err) {
-            console.error("Recommendation AdSense push failed:", err);
-        }
+    // Lazy-initialize the mid-grid AdSense unit when user scrolls near it
+    const injectedAd = recGrid.querySelector("ins.lazy-rec-ad");
+    if (injectedAd) {
+        const adObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                obs.unobserve(injectedAd);
+
+                if (!injectedAd.dataset.adStatus) {
+                    try {
+                        (window.adsbygoogle = window.adsbygoogle || []).push({});
+                    } catch (err) {
+                        console.error("Recommendation AdSense push failed:", err);
+                    }
+                }
+            });
+        }, { rootMargin: "250px" });
+
+        adObserver.observe(injectedAd);
     }
 
     // Slowly & gently upgrade thumbnails to crisp 640px WebP only when scrolled into view

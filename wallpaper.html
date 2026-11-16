@@ -1,14 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Wallpaper | Stillframe</title>
+    <!-- Primary SEO Meta Tags (Updated dynamically by wallpaper.js) -->
+    <title>Wallpaper | stillframe.</title>
+    <meta name="description"
+        content="Download free 2K and 4K high-resolution wallpapers for desktop and mobile screens at stillframe.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://stillframe.youtubethumbgrabber.xyz/wallpaper.html">
+
+    <!-- Open Graph / Social Meta Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="stillframe.">
+    <meta property="og:title" content="Wallpaper | stillframe.">
+    <meta property="og:description"
+        content="Download free 2K and 4K high-resolution wallpapers for desktop and mobile screens at stillframe.">
+    <meta property="og:url" content="https://stillframe.youtubethumbgrabber.xyz/wallpaper.html">
+    <meta property="og:image"
+        content="https://stillframe.youtubethumbgrabber.xyz/MacBook%20Pro%20with%20Painted%20Sunset%20Lock%20Screen.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wallpaper | stillframe.">
+    <meta name="twitter:description"
+        content="Download free 2K and 4K high-resolution wallpapers for desktop and mobile screens at stillframe.">
+    <meta name="twitter:image"
+        content="https://stillframe.youtubethumbgrabber.xyz/MacBook%20Pro%20with%20Painted%20Sunset%20Lock%20Screen.png">
+
+    <!-- Favicon & Theme Color -->
+    <link rel="icon" href="/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <meta name="theme-color" content="#18181b">
+
+    <!-- Performance Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://wsrv.nl" crossorigin>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="shortcut icon" href="/logo.png" type="image/x-icon">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap');
@@ -18,6 +50,9 @@
         }
     </style>
 
+    <!-- Dynamic ImageObject JSON-LD Placeholder -->
+    <script type="application/ld+json" id="wallpaper-schema">{}</script>
+
     <!-- Load AdSense script once -->
     <script async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2179785225331533"
@@ -26,16 +61,17 @@
 
 <body class="bg-zinc-900 text-zinc-200">
 
-    <div class="max-w-7xl mx-auto min-h-screen">
+    <div class="max-w-7xl mx-auto min-h-screen flex flex-col">
 
         <!-- Header -->
-        <header class="sticky top-4 z-50 mx-4 my-4">
+           <header class="sticky top-4 z-50 mx-4 my-4">
             <div
                 class="flex items-center justify-between px-5 py-2.5 rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 shadow-lg shadow-black/20">
 
                 <!-- Left: Brand -->
-                <a href="/" class="flex items-center gap-2.5 group">
-                    <img class="h-8 w-8 rounded-xl object-cover" src="/logo.png" alt="stillframe logo">
+                <a href="/index.html" class="flex items-center gap-2.5 group">
+                    <img class="h-8 w-8 rounded-xl object-cover" src="/logo.png" width="32" height="32"
+                        alt="stillframe logo">
                     <span class="text-xl sm:text-2xl font-bold tracking-tight text-white">
                         stillframe<span class="text-lime-300">.</span>
                     </span>
@@ -45,12 +81,12 @@
                 <nav aria-label="Main Navigation"
                     class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
                     <a href="#categories" class="hover:text-white transition-colors duration-200">Categories</a>
-                    <a href="/about" class="hover:text-white transition-colors duration-200">About</a>
-                    <a href="/contact" class="hover:text-white transition-colors duration-200">Contact</a>
+                    <a href="/pages/about.html" class="hover:text-white transition-colors duration-200">About</a>
+                    <a href="/pages/contact.html" class="hover:text-white transition-colors duration-200">Contact</a>
                 </nav>
 
                 <!-- Right: CTA + Mobile Toggle -->
-                <div class="flex items-center gap-2 ">
+                <div class="flex items-center gap-2">
                     <a href="#wallpaper-grid"
                         class="bg-lime-300 text-zinc-950 font-medium py-1.5 px-3.5 sm:px-4 rounded-full text-xs sm:text-sm hover:bg-lime-200 transition duration-200 sm:block hidden">
                         Explore wallpapers ↗
@@ -71,14 +107,15 @@
                 class="hidden md:hidden mt-2 p-4 rounded-2xl bg-zinc-900/95 backdrop-blur-md border border-zinc-800 shadow-xl flex-col gap-3 text-sm font-medium text-zinc-300">
                 <a href="#categories"
                     class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">Categories</a>
-                <a href="/about" class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">About</a>
-                <a href="/contact"
+                <a href="/about.html"
+                    class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">About</a>
+                <a href="/contact.html"
                     class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">Contact</a>
             </nav>
         </header>
 
-        <!-- Top Ad -->
-        <div class="px-4">
+        <!-- Top Ad (Reserved min-height prevents CLS) -->
+        <div class="px-4 min-h-[100px]">
             <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2179785225331533"
                 data-ad-slot="1507326584" data-ad-format="auto" data-full-width-responsive="true"></ins>
             <script>
@@ -87,9 +124,9 @@
         </div>
 
         <!-- Wallpaper Details -->
-        <main class="p-4 py-8">
+        <main id="wallpaper-main" class="p-4 py-8 flex-1">
 
-            <a href="/index.html" class="text-sm text-zinc-400 hover:text-lime-300">
+            <a href="/index.html" class="text-sm text-zinc-400 hover:text-lime-300 transition-colors">
                 ← Back to wallpapers
             </a>
 
@@ -98,7 +135,7 @@
                 <!-- Image -->
                 <div class="lg:col-span-2">
                     <div class="border border-zinc-700 rounded-2xl p-2">
-                        <img id="wallpaper-image" src="" alt=""
+                        <img id="wallpaper-image" src="" alt="" fetchpriority="high" decoding="async"
                             class="w-full rounded-xl object-contain max-h-[650px] bg-zinc-950">
                     </div>
                 </div>
@@ -106,15 +143,17 @@
                 <!-- Information -->
                 <div class="flex flex-col gap-5">
                     <div>
-                        <span id="wallpaper-category" class="text-lime-300 text-sm font-medium"></span>
+                        <a id="wallpaper-category" href="/category.html"
+                            class="text-lime-300 text-sm font-medium hover:underline"></a>
 
-                        <h2 id="wallpaper-title" class="text-3xl sm:text-4xl font-bold tracking-tight mt-3"></h2>
+                        <h1 id="wallpaper-title" class="text-3xl sm:text-4xl font-bold tracking-tight mt-3 text-white">
+                        </h1>
 
                         <p id="wallpaper-description" class="text-zinc-400 mt-4 leading-relaxed"></p>
                     </div>
 
                     <div class="border border-zinc-700 rounded-2xl p-4 space-y-4">
-                        <h3 class="font-semibold text-lg">Wallpaper Information</h3>
+                        <h2 class="font-semibold text-lg text-white">Wallpaper Information</h2>
 
                         <div class="flex justify-between">
                             <span class="text-zinc-400">Resolution</span>
@@ -141,10 +180,12 @@
             </div>
 
             <!-- Recommendations Section -->
-            <section id="recommendations-section" class="mt-16 pt-10 border-t border-zinc-800">
+            <section id="recommendations-section" aria-labelledby="recommendations-heading"
+                class="mt-16 pt-10 border-t border-zinc-800">
                 <div class="flex items-end justify-between mb-6">
                     <div>
-                        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                        <h2 id="recommendations-heading"
+                            class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
                             More Wallpapers for You
                         </h2>
                         <p id="recommendations-subtitle" class="text-zinc-400 text-sm mt-1">
@@ -161,7 +202,8 @@
 
     </div>
 
-      <footer class="px-4 pt-12 pb-6">
+    <!-- Footer -->
+    <footer class="max-w-7xl mx-auto px-4 pt-12 pb-6">
         <div class="rounded-3xl bg-zinc-950/80 border border-zinc-800 p-6 sm:p-10">
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-8 border-b border-zinc-800/80">
@@ -170,7 +212,8 @@
                 <div class="lg:col-span-5 flex flex-col justify-between gap-4">
                     <div>
                         <a href="/index.html" class="inline-flex items-center gap-2.5">
-                            <img src="/logo.png" alt="stillframe logo" class="h-8 w-8 rounded-xl object-cover">
+                            <img src="/logo.png" width="32" height="32" alt="stillframe logo"
+                                class="h-8 w-8 rounded-xl object-cover">
                             <span class="text-2xl font-bold tracking-tight text-white">
                                 stillframe<span class="text-lime-300">.</span>
                             </span>
@@ -188,7 +231,7 @@
                     </div>
                 </div>
 
-                <!-- Categories (Matches /Categories/ folders) -->
+                <!-- Categories -->
                 <div class="lg:col-span-3">
                     <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-3">
                         Categories
@@ -218,12 +261,12 @@
                         <li><a href="/index.html" class="hover:text-lime-300 transition-colors">Home</a></li>
                         <li><a href="/index.html#wallpaper-grid" class="hover:text-lime-300 transition-colors">All
                                 Wallpapers</a></li>
-                        <li><a href="/about.html" class="hover:text-lime-300 transition-colors">About</a></li>
-                        <li><a href="/contact.html" class="hover:text-lime-300 transition-colors">Contact</a></li>
+                        <li><a href="/pages/about.html" class="hover:text-lime-300 transition-colors">About</a></li>
+                        <li><a href="/pages/contact.html" class="hover:text-lime-300 transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
-                <!-- Legal (Recommended for AdSense) -->
+                <!-- Legal -->
                 <div class="lg:col-span-2">
                     <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-3">
                         Legal
@@ -255,7 +298,7 @@
 
     <script src="/js/wallpapers.js"></script>
     <script src="/js/wallpaper.js"></script>
-<script>
+    <script>
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 

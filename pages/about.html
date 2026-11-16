@@ -1,54 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Stillframe | Stillframe</title>
+    <title>About Stillframe | stillframe.</title>
     <meta name="description"
         content="Stillframe is a curated collection of free, high-resolution desktop wallpapers in painterly styles.">
+    <link rel="canonical" href="https://stillframe.youtubethumbgrabber.xyz/about.html">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="shortcut icon" href="/logo.png" type="image/x-icon">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
 
         .doc h2 {
             font-size: 1.25rem;
             font-weight: 600;
             color: #fff;
-            margin: 2rem 0 .5rem
+            margin: 2rem 0 .5rem;
         }
 
         .doc p,
         .doc li {
             color: #a1a1aa;
             line-height: 1.75;
-            margin: .5rem 0
+            margin: .5rem 0;
         }
 
         .doc ul {
             list-style: disc;
-            padding-left: 1.4rem
+            padding-left: 1.4rem;
         }
 
         .doc a {
             color: #bef264;
-            text-decoration: underline
+            text-decoration: underline;
         }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2179785225331533"
         crossorigin="anonymous"></script>
 </head>
 
-<body class="bg-zinc-900 text-zinc-200" style="font-family:'Google Sans',sans-serif">
-    <div class="max-w-7xl mx-auto min-h-screen">
-        <header class="flex justify-between items-center p-4 m-4 border border-zinc-700 rounded-full">
-            <a href="/" class="flex items-center gap-2"><img class="h-8 rounded-xl" src="/logo.png"
-                    alt="Stillframe logo"><span class="sm:text-2xl text-xl">stillframe.</span></a>
-            <a class="border border-zinc-700 py-1 sm:px-3 px-2 rounded-full text-sm hover:bg-zinc-800 transition"
-                href="/">Explore wallpapers ↗</a>
+<body class="bg-zinc-900 text-zinc-200" style="font-family: 'Google Sans', sans-serif;">
+    <div class="max-w-7xl mx-auto min-h-screen flex flex-col">
+
+        <!-- Header -->
+          <header class="sticky top-4 z-50 mx-4 my-4">
+            <div
+                class="flex items-center justify-between px-5 py-2.5 rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 shadow-lg shadow-black/20">
+
+                <!-- Left: Brand -->
+                <a href="/index.html" class="flex items-center gap-2.5 group">
+                    <img class="h-8 w-8 rounded-xl object-cover" src="/logo.png" width="32" height="32"
+                        alt="stillframe logo">
+                    <span class="text-xl sm:text-2xl font-bold tracking-tight text-white">
+                        stillframe<span class="text-lime-300">.</span>
+                    </span>
+                </a>
+
+                <!-- Center: Desktop Nav Links -->
+                <nav aria-label="Main Navigation"
+                    class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+                    <a href="#categories" class="hover:text-white transition-colors duration-200">Categories</a>
+                    <a href="/pages/about.html" class="hover:text-white transition-colors duration-200">About</a>
+                    <a href="/pages/contact.html" class="hover:text-white transition-colors duration-200">Contact</a>
+                </nav>
+
+                <!-- Right: CTA + Mobile Toggle -->
+                <div class="flex items-center gap-2">
+                    <a href="#wallpaper-grid"
+                        class="bg-lime-300 text-zinc-950 font-medium py-1.5 px-3.5 sm:px-4 rounded-full text-xs sm:text-sm hover:bg-lime-200 transition duration-200 sm:block hidden">
+                        Explore wallpapers ↗
+                    </a>
+
+                    <!-- Mobile Hamburger Button -->
+                    <button id="mobile-menu-btn" type="button" aria-label="Toggle Menu" aria-expanded="false"
+                        class="md:hidden p-2 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Dropdown Menu -->
+            <nav id="mobile-menu" aria-label="Mobile Navigation"
+                class="hidden md:hidden mt-2 p-4 rounded-2xl bg-zinc-900/95 backdrop-blur-md border border-zinc-800 shadow-xl flex-col gap-3 text-sm font-medium text-zinc-300">
+                <a href="#categories"
+                    class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">Categories</a>
+                <a href="/about.html"
+                    class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">About</a>
+                <a href="/contact.html"
+                    class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">Contact</a>
+            </nav>
         </header>
-        <main class="doc max-w-3xl mx-auto px-6 py-8">
+
+        <!-- Main Content -->
+        <main class="doc max-w-3xl mx-auto px-6 py-8 flex-1 w-full">
             <h1 class="text-4xl font-bold tracking-tight text-white">About Stillframe</h1>
             <p class="mt-4">Stillframe is a curated collection of free desktop wallpapers. Every wallpaper is available
                 in 2K or 4K, so it stays sharp on laptops, monitors and large displays.</p>
@@ -67,12 +115,116 @@
                 are added regularly. Stillframe is free to use and supported by advertising.</p>
             <h2>Get in touch</h2>
             <p>Questions, suggestions or takedown requests? Visit our <a href="/contact.html">contact page</a> or email
-                <a href="mailto:contact@yourdomain.com">contact@yourdomain.com</a>.
+                <a href="mailto:contact@youtubethumbgrabber.xyz">contact@youtubethumbgrabber.xyz</a>.
             </p>
         </main>
-        <footer id="site-footer"></footer>
+
+        <!-- Footer -->
+        <footer class="max-w-7xl mx-auto px-4 pt-12 pb-6">
+        <div class="rounded-3xl bg-zinc-950/80 border border-zinc-800 p-6 sm:p-10">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-8 border-b border-zinc-800/80">
+
+                <!-- Brand & Tagline -->
+                <div class="lg:col-span-5 flex flex-col justify-between gap-4">
+                    <div>
+                        <a href="/index.html" class="inline-flex items-center gap-2.5">
+                            <img src="/logo.png" width="32" height="32" alt="stillframe logo"
+                                class="h-8 w-8 rounded-xl object-cover">
+                            <span class="text-2xl font-bold tracking-tight text-white">
+                                stillframe<span class="text-lime-300">.</span>
+                            </span>
+                        </a>
+
+                        <p class="text-zinc-400 text-sm leading-relaxed mt-3 max-w-sm">
+                            A carefully curated collection of 2K and 4K wallpapers inspired by icons, imagination, and
+                            the art of standing apart.
+                        </p>
+                    </div>
+
+                    <div class="flex items-center gap-2 text-xs text-zinc-400">
+                        <span class="inline-block w-2 h-2 rounded-full bg-lime-300"></span>
+                        <span>Free high-resolution downloads for personal screens</span>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div class="lg:col-span-3">
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-3">
+                        Categories
+                    </h3>
+                    <ul class="space-y-2.5 text-sm text-zinc-400">
+                        <li><a href="/category.html?category=Abstract"
+                                class="hover:text-lime-300 transition-colors">Abstract</a></li>
+                        <li><a href="/category.html?category=Anime"
+                                class="hover:text-lime-300 transition-colors">Anime</a></li>
+                        <li><a href="/category.html?category=Modern"
+                                class="hover:text-lime-300 transition-colors">Modern</a></li>
+                        <li><a href="/category.html?category=Motivational"
+                                class="hover:text-lime-300 transition-colors">Motivational</a></li>
+                        <li><a href="/category.html?category=Nature"
+                                class="hover:text-lime-300 transition-colors">Nature</a></li>
+                        <li><a href="/category.html?category=Superhero"
+                                class="hover:text-lime-300 transition-colors">Superhero</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation -->
+                <div class="lg:col-span-2">
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-3">
+                        Explore
+                    </h3>
+                    <ul class="space-y-2.5 text-sm text-zinc-400">
+                        <li><a href="/index.html" class="hover:text-lime-300 transition-colors">Home</a></li>
+                        <li><a href="/index.html#wallpaper-grid" class="hover:text-lime-300 transition-colors">All
+                                Wallpapers</a></li>
+                        <li><a href="/pages/about.html" class="hover:text-lime-300 transition-colors">About</a></li>
+                        <li><a href="/pages/contact.html" class="hover:text-lime-300 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div class="lg:col-span-2">
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-3">
+                        Legal
+                    </h3>
+                    <ul class="space-y-2.5 text-sm text-zinc-400">
+                        <li><a href="/pages/privacy-policy.html" class="hover:text-lime-300 transition-colors">Privacy
+                                Policy</a></li>
+                        <li><a href="/pages/terms.html" class="hover:text-lime-300 transition-colors">Terms of Use</a>
+                        </li>
+                        <li><a href="/pages/disclaimer.html"
+                                class="hover:text-lime-300 transition-colors">Disclaimer</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+                <p>© 2026 <span class="text-zinc-300 font-medium">stillframe.</span> All rights reserved.</p>
+
+                <button type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+                    class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 hover:bg-zinc-900 transition cursor-pointer">
+                    Back to top ↑
+                </button>
+            </div>
+
+        </div>
+    </footer>
+
     </div>
-    <script src="/js/site.js"></script>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex', !isHidden);
+            menuBtn.setAttribute('aria-expanded', String(!isHidden));
+        });
+    </script>
 </body>
 
 </html>

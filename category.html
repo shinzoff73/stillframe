@@ -22,13 +22,14 @@
     <div class="max-w-7xl mx-auto min-h-screen flex flex-col">
 
         <!-- Header -->
-        <header class="sticky top-4 z-50 mx-4 my-4">
+          <header class="sticky top-4 z-50 mx-4 my-4">
             <div
                 class="flex items-center justify-between px-5 py-2.5 rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 shadow-lg shadow-black/20">
 
                 <!-- Left: Brand -->
-                <a href="/" class="flex items-center gap-2.5 group">
-                    <img class="h-8 w-8 rounded-xl object-cover" src="/logo.png" alt="stillframe logo">
+                <a href="/index.html" class="flex items-center gap-2.5 group">
+                    <img class="h-8 w-8 rounded-xl object-cover" src="/logo.png" width="32" height="32"
+                        alt="stillframe logo">
                     <span class="text-xl sm:text-2xl font-bold tracking-tight text-white">
                         stillframe<span class="text-lime-300">.</span>
                     </span>
@@ -38,12 +39,12 @@
                 <nav aria-label="Main Navigation"
                     class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
                     <a href="#categories" class="hover:text-white transition-colors duration-200">Categories</a>
-                    <a href="/about" class="hover:text-white transition-colors duration-200">About</a>
-                    <a href="/contact" class="hover:text-white transition-colors duration-200">Contact</a>
+                    <a href="/pages/about.html" class="hover:text-white transition-colors duration-200">About</a>
+                    <a href="/pages/contact.html" class="hover:text-white transition-colors duration-200">Contact</a>
                 </nav>
 
                 <!-- Right: CTA + Mobile Toggle -->
-                <div class="flex items-center gap-2 ">
+                <div class="flex items-center gap-2">
                     <a href="#wallpaper-grid"
                         class="bg-lime-300 text-zinc-950 font-medium py-1.5 px-3.5 sm:px-4 rounded-full text-xs sm:text-sm hover:bg-lime-200 transition duration-200 sm:block hidden">
                         Explore wallpapers ↗
@@ -64,8 +65,9 @@
                 class="hidden md:hidden mt-2 p-4 rounded-2xl bg-zinc-900/95 backdrop-blur-md border border-zinc-800 shadow-xl flex-col gap-3 text-sm font-medium text-zinc-300">
                 <a href="#categories"
                     class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">Categories</a>
-                <a href="/about" class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">About</a>
-                <a href="/contact"
+                <a href="/about.html"
+                    class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">About</a>
+                <a href="/contact.html"
                     class="px-3 py-2 rounded-xl hover:bg-zinc-800 hover:text-white transition">Contact</a>
             </nav>
         </header>
@@ -126,7 +128,7 @@
         </main>
 
         <!-- Footer -->
-       <footer class="px-4 pt-12 pb-6">
+      <footer class="max-w-7xl mx-auto px-4 pt-12 pb-6">
         <div class="rounded-3xl bg-zinc-950/80 border border-zinc-800 p-6 sm:p-10">
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-8 border-b border-zinc-800/80">
@@ -135,7 +137,8 @@
                 <div class="lg:col-span-5 flex flex-col justify-between gap-4">
                     <div>
                         <a href="/index.html" class="inline-flex items-center gap-2.5">
-                            <img src="/logo.png" alt="stillframe logo" class="h-8 w-8 rounded-xl object-cover">
+                            <img src="/logo.png" width="32" height="32" alt="stillframe logo"
+                                class="h-8 w-8 rounded-xl object-cover">
                             <span class="text-2xl font-bold tracking-tight text-white">
                                 stillframe<span class="text-lime-300">.</span>
                             </span>
@@ -153,7 +156,7 @@
                     </div>
                 </div>
 
-                <!-- Categories (Matches /Categories/ folders) -->
+                <!-- Categories -->
                 <div class="lg:col-span-3">
                     <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-3">
                         Categories
@@ -183,12 +186,12 @@
                         <li><a href="/index.html" class="hover:text-lime-300 transition-colors">Home</a></li>
                         <li><a href="/index.html#wallpaper-grid" class="hover:text-lime-300 transition-colors">All
                                 Wallpapers</a></li>
-                        <li><a href="/about.html" class="hover:text-lime-300 transition-colors">About</a></li>
-                        <li><a href="/contact.html" class="hover:text-lime-300 transition-colors">Contact</a></li>
+                        <li><a href="/pages/about.html" class="hover:text-lime-300 transition-colors">About</a></li>
+                        <li><a href="/pages/contact.html" class="hover:text-lime-300 transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
-                <!-- Legal (Recommended for AdSense) -->
+                <!-- Legal -->
                 <div class="lg:col-span-2">
                     <h3 class="text-sm font-semibold uppercase tracking-wider text-white mb-3">
                         Legal
