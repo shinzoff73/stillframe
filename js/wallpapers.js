@@ -1,5 +1,81 @@
 
 window.wallpapers = [
+    // 14. Melting Gold Pocket Watch
+    {
+        id: "melting-gold-pocket-watch",
+        title: "Melting Gold Pocket Watch",
+        category: "Abstract",
+        image: "https://i.postimg.cc/ZRLjYDW2/Gold-pocket-watch-melting-0beeed48-2K.jpg",
+        resolution: "2560 × 1440",
+        size: "2K",
+        description: "A surreal impasto oil painting of an antique gold pocket watch melting into thick, dripping streams of liquid gold across a textured cream canvas. Sculptural palette-knife strokes and warm metallic highlights create a striking desktop wallpaper."
+    },
+
+    // 15. Money Talks
+    {
+        id: "money-talks",
+        title: "Money Talks",
+        category: "Motivational",
+        image: "https://i.postimg.cc/50mp9kHt/Impasto-painting-of-money-talks-b2fd76a0-2K.jpg",
+        resolution: "2560 × 1440",
+        size: "2K",
+        description: "A bold mixed-media impasto painting featuring classic currency engraving details framed by deep navy and charcoal brushstrokes, anchored by crisp serif typography reading 'Money Talks'. Rich paint texture and dramatic contrast make for an expressive desktop wallpaper."
+    },
+
+    // 16. Monochrome Banknote Stack
+    {
+        id: "monochrome-banknote-stack",
+        title: "Monochrome Banknote Stack",
+        category: "Modern",
+        image: "https://i.postimg.cc/rm9gyYdz/Monochrome-banknote-stack-still-c2dbb0a9-2K.jpg",
+        resolution: "2560 × 1440",
+        size: "2K",
+        description: "A modern still-life impasto painting depicting a neat stack of monochrome slate-grey banknotes resting against a dark, heavily textured backdrop. Subtle tonal shifts and sculpted palette-knife brushwork create a clean, minimal desktop wallpaper."
+    },
+
+    // 17. Never Settle
+    {
+        id: "never-settle",
+        title: "Never Settle",
+        category: "Motivational",
+        image: "https://i.postimg.cc/C10mgVxt/Never-Settle-desktop-artwork-283fdbdd-2K.jpg",
+        resolution: "2560 × 1440",
+        size: "2K",
+        description: "A high-impact typographic impasto artwork featuring bold, hand-brushed black lettering reading 'Never Settle' accented with subtle crimson flecks over a warm off-white textured canvas. Raw painterly energy makes for an inspiring desktop wallpaper."
+    },
+
+    // 18. Skiers on Snowy Mountain
+    {
+        id: "skiers-snowy-mountain",
+        title: "Skiers Carving the Alpine Slope",
+        category: "Nature",
+        image: "https://i.postimg.cc/qRGQBZN5/Skiers-carving-down-snowy-mountain-b590bb94-2K.jpg",
+        resolution: "2560 × 1440",
+        size: "2K",
+        description: "An energetic winter landscape impasto painting capturing skiers carving down a sunlit snow-covered mountain peak beneath a crisp blue sky. Thick white palette-knife strokes bring the kicking snow powder and alpine ridges to life."
+    },
+
+    // 19. Crimson Horizon Leap
+    {
+        id: "crimson-horizon-leap",
+        title: "Crimson Horizon Leap",
+        category: "Modern",
+        image: "https://i.postimg.cc/1tKMRYg1/Universal-Upscaler-Pro-Precise-2-1f1e247c-605a-6490-a888-c978ea9378d5.jpg",
+        resolution: "3840 × 2160",
+        size: "4K",
+        description: "A dynamic contemporary impasto artwork capturing a silhouette leaping mid-air across a fiery backdrop of crimson red, burnt orange, and deep charcoal brushwork. Bold movement and rich 4K texture create an energetic desktop wallpaper."
+    },
+
+    // 20. Open Book Impasto
+    {
+        id: "open-book-impasto",
+        title: "The Open Chapter",
+        category: "Modern",
+        image: "https://i.postimg.cc/3RZ9rbkq/Universal-Upscaler-Pro-Precise-2-1f1e248b-1dcd-6b40-a66f-222e0780935a.jpg",
+        resolution: "3840 × 2160",
+        size: "4K",
+        description: "A warm, atmospheric impasto oil painting of an open hardcover book resting on a dark rustic surface, illuminated by soft golden light. Thick palette-knife strokes across the fanned pages create a calm, focused 4K desktop wallpaper."
+    },
     // 09. Different by Design
     {
         id: "different-by-design",
